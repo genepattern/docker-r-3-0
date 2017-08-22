@@ -2,5 +2,5 @@
 
 . runConfig.sh
 
-. ../../common/testing_scripts/runLocal.sh
-
+#. ../../common/testing_scripts/runLocal.sh
+. local.sh
