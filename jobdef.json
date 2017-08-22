@@ -24,7 +24,7 @@
 
 	    }
         ],
-        "image": "liefeld/r30_cli",
+        "image": "genepattern/docker-r-3-0",
         "memory": 200,
         "mountPoints": [],
         "ulimits": [],
