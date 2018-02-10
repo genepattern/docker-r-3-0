@@ -34,7 +34,7 @@ local({
       # Is there a CRAN mirror defined?  If not, use the default one. This used for building CRAN URLs.
       cran.repos.url <- getOption("repos")["CRAN"]
       if (!is.usable.URL(cran.repos.url)) {
-         cran.repos.url <- "http://cran.r-project.org"
+         cran.repos.url <- "https://cloud.r-project.org"
       }
       
       # Add a trailing '/' if the mirror URL does not have it already.
@@ -50,7 +50,7 @@ local({
       # sixth column: optional URL for a Windows binary package location
       # Precedence Rules:
       # 1) If a URL is specified in the column appropriate for the current platform, that will be used for installation
-      #    regardless of any other specifications.  This must be usable by R's download.file (http or ftp only), 
+      #    regardless of any other specifications.  This must be usable by R's download.file (http, https or ftp only), 
       #    otherwise it is ignored.
       # 2) Otherwise, if no such URL is specified but (a) the CRAN archive name AND (b) a version string are specified AND
       #    (c) we're installing from source (i.e. on Linux), then a CRAN URL will be constructed and used for installation.
@@ -145,7 +145,7 @@ local({
    ## Helper functions ##
    
    is.usable.URL <- function(URL) {
-     return(is.character(URL) && grepl("^(http|ftp|file)://", URL))
+     return(is.character(URL) && grepl("^(https|http|ftp|file)://", URL))
    }
    
    is.null.or.blank <- function(value) {
@@ -176,7 +176,7 @@ local({
             write("About to initialize the Bioconductor loader", stdout())
             write("---------------------\n", stdout())
             # Always pull the init script from the main Bioconductor site for simplicity (rather than checking for bioC_mirror option).
-            source("http://bioconductor.org/biocLite.R")
+            source("https://bioconductor.org/biocLite.R")
          },
          error=function(err) {
             write(paste0("Error: ", conditionMessage(err)), stderr())
@@ -312,11 +312,11 @@ local({
       pkg.info$do.byName.install <- FALSE
       
       # Create expected URL for a source package.  
-      # Should look like e.g. http://cran.r-project.org/src/contrib/Archive/spatial/spatial_7.3-5.tar.gz
+      # Should look like e.g. https://cloud.r-project.org/src/contrib/Archive/spatial/spatial_7.3-5.tar.gz
       pkg.info$URL <- paste0(cran.repos.url, "src/contrib/Archive/", pkg.info$name, "/", pkg.info$name, "_", pkg.info$requested.version, ".tar.gz")
 
       # Create expected URL for a source package.  
-      # Should look like e.g. http://cran.r-project.org/src/contrib/spatial_7.3-5.tar.gz
+      # Should look like e.g. https://cloud.r-project.org/src/contrib/spatial_7.3-5.tar.gz
       pkg.info$altURL <- paste0(cran.repos.url, "src/contrib/", pkg.info$name, "_", pkg.info$requested.version, ".tar.gz")
       return(pkg.info)
    }
