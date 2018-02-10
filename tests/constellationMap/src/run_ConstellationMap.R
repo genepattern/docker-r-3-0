@@ -2,7 +2,7 @@
 # SOFTWARE COPYRIGHT NOTICE AGREEMENT
 # The MIT License (MIT)
 
-# Copyright (c) 2015 The Broad Institute of Harvard and MIT
+# Copyright (c) 2015-2018 The Broad Institute of Harvard and MIT
 #   
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -36,22 +36,17 @@ suppressMessages(suppressWarnings(library(sp)))
 suppressMessages(suppressWarnings(library(maptools)))
 suppressMessages(suppressWarnings(library(parmigene)))
 suppressMessages(suppressWarnings(library(plotrix)))
-suppressMessages(suppressWarnings(library(Rcpp)))
-suppressMessages(suppressWarnings(library(plyr)))
 suppressMessages(suppressWarnings(library(stringi)))
 suppressMessages(suppressWarnings(library(magrittr)))
 suppressMessages(suppressWarnings(library(stringr)))
-suppressMessages(suppressWarnings(library(reshape2)))
 suppressMessages(suppressWarnings(library(RColorBrewer)))
 suppressMessages(suppressWarnings(library(dichromat)))
 suppressMessages(suppressWarnings(library(colorspace)))
 suppressMessages(suppressWarnings(library(munsell)))
 suppressMessages(suppressWarnings(library(labeling)))
-suppressMessages(suppressWarnings(library(scales)))
 suppressMessages(suppressWarnings(library(digest)))
 suppressMessages(suppressWarnings(library(gtable)))
 suppressMessages(suppressWarnings(library(proto)))
-suppressMessages(suppressWarnings(library(ggplot2)))
 suppressMessages(suppressWarnings(library(Formula)))
 suppressMessages(suppressWarnings(library(Hmisc)))
 suppressMessages(suppressWarnings(library(polynom)))
@@ -64,7 +59,7 @@ suppressMessages(suppressWarnings(library(spam)))
 suppressMessages(suppressWarnings(library(maps)))
 suppressMessages(suppressWarnings(library(fields)))
 suppressMessages(suppressWarnings(library(CircStats)))
-library(Cairo)
+
 args <- commandArgs(trailingOnly=TRUE)
 
 libdir <- args[1]
@@ -241,11 +236,9 @@ if(image.format=="PDF") {
   print(output.filename)
   pdf(file.path(output.filename), width=11, height=8.5)
 } else if(image.format=="PNG") {
-
-  print("===== MAKE A PNG ===== "
-
   output.filename <- paste(output.prefix, gs.prefix, target.class, "CONSTELLATION_MAP.png", sep=".")
-  png(filename=file.path(output.filename), width=10, height=7.5, units="in", res=120, type="cairo")
+  print(output.filename)
+  png(filename=file.path(output.filename), width=10, height=7.5, units="in", res=120)
 }
 
 layout(matrix(c(1,2,3,4), 2, 2, byrow=T), heights=c(7,1.5), widths=c(7, 4))
