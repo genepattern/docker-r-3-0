@@ -1,3 +1,5 @@
+# copyright 2017-2018 Regents of the University of California and the Broad Institute. All rights reserved.
+
 FROM r-base:3.1.3
 
 RUN mkdir /build
@@ -7,27 +9,37 @@ RUN apt-get update && apt-get upgrade --yes && \
     apt-get install python-dev --yes && \
     apt-get install default-jre --yes && \
     wget --no-check-certificate https://bootstrap.pypa.io/get-pip.py && \
-    python get-pip.py 
-
-RUN pip install awscli 
-
-RUN apt-get update && \
+    python get-pip.py &&\
+    pip install awscli && \
+    apt-get update && \
     apt-get install curl --yes
+
+# RUN pip install awscli 
+
+#RUN apt-get update && \
+#    apt-get install curl --yes
     
+COPY common/container_scripts/misc/Cairo_1.5-9.tar.gz /build/Cairo_1.5-9.tar.gz
 
 RUN  mkdir packages && \
     cd packages && \
     curl -O http://cran.r-project.org/src/base/R-3/R-3.0.3.tar.gz && \
     tar xvf R-3.0.3.tar.gz && \
-    cd R-3.0.3 && \
-    ./configure --with-x=no && \
-    make && \
-    make check && \
-    make install && \
+    apt-get install libfreetype6=2.5.2-3+deb8u2 --yes --force-yes && \
+    apt-get install libfreetype6-dev --yes  --force-yes && \
+    apt-get install libfontconfig1-dev --yes  --force-yes && \
+    apt-get install libcairo2-dev --yes  --force-yes && \
+    apt-get install libxt-dev  --yes --force-yes && \
     apt-get install libxml2-dev --yes && \
     apt-get install libcurl4-gnutls-dev --yes && \
     apt-get install mesa-common-dev --yes && \
-    apt-get install --yes libglu1-mesa-dev freeglut3-dev  bwidget
+    apt-get install --yes libglu1-mesa-dev freeglut3-dev  bwidget &&\
+    cd R-3.0.3 && \
+    ./configure --with-x=no --without-x --with-cairo --with-libpng && \
+    make && \
+    make check && \
+    make install && \
+    R CMD INSTALL /build/Cairo_1.5-9.tar.gz    
 
 
 COPY common/container_scripts/runS3OnBatch.sh /usr/local/bin/runS3OnBatch.sh
