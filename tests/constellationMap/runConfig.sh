@@ -15,7 +15,7 @@ COMMAND_LINE="Rscript $TASKLIB/run_ConstellationMap.R  $TASKLIB/ --input.gct.fil
 
 
 DOCKER_CONTAINER=genepattern/docker-r-3-0-conmap
-JOB_DEFINITION_NAME="R30_Generic"
+JOB_DEFINITION_NAME="R30_Generic_conmap"
 JOB_ID=gp_job_r30_ConMap_$1
 JOB_QUEUE=TedTest
 
