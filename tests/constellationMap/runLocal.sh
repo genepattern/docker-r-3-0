@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. runConfig.sh
+. ./runConfig.sh
 
 . ../../common/testing_scripts/runLocal.sh
 #. rl.sh

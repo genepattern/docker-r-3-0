@@ -46,8 +46,8 @@ COPY common/container_scripts/runS3OnBatch.sh /usr/local/bin/runS3OnBatch.sh
 COPY common/container_scripts/installPackages.R-2  /build/source/installPackages.R
 COPY sources.list /etc/apt/sources.list
 COPY common/container_scripts/runLocal.sh /usr/local/bin/runLocal.sh
-COPY Rprofile.gp.site ~/.Rprofile
-COPY Rprofile.gp.site /usr/lib/R/etc/Rprofile.site
+#COPY Rprofile.gp.site ~/.Rprofile
+COPY Rprofile.gp.site /usr/local/lib/R/etc/Rprofile.site
 RUN chmod ugo+x /usr/local/bin/runS3OnBatch.sh
 ENV R_LIBS_S3=/genepattern-server/Rlibraries/R303/rlibs
 ENV R_LIBS=/usr/local/lib/R/site-library
